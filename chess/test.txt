@@ -1,0 +1,40 @@
+load 'board.rb'
+load 'display.rb'
+load 'cursorable.rb'
+
+b = Board.new
+d = Display.new(b)
+
+
+load 'king.rb'
+load 'knight.rb'
+load 'piece.rb'
+load 'stepable.rb'
+load 'board.rb'
+
+b = Board.new
+
+n = Knight.new(:black, b, [0, 0])
+n.moves
+
+k = King.new(:black, b, [0,0])
+
+
+result = []
+result << grow(x + 1, y)
+result << grow(x - 1, y)
+result << grow(x, y + 1)
+result << grow(x, y - 1)
+result
+
+
+def grow(x, y)
+  return [[]] unless valid_move?(x + 1, y)
+
+  [[x + 1, y]] + grow(x + 1, y)
+
+end
+
+def valid_move?(x, y)
+  [x, y].all? { |el| el.between?(0, 7) }
+end
