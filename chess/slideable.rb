@@ -1,8 +1,7 @@
 module Slideable
 
   def moves
-    x, y = @pos
-
+    move_dirs
   end
 
   private
@@ -11,34 +10,30 @@ module Slideable
 
   end
 
-  def horizontal_dirs
-    collect = []
+  def horizontal
     x, y = @pos
-    (0..7).to_a.each do |y_var|
-      collect << [x, y_var]
-    end
-
-    (0..7).to_a.each do |x_var|
-      collect << [x_var, y]
-    end
-
-    collect.delete(@pos)
+    hor = get_spaces(x, y, 0, 1) + get_spaces(x, y, 0, -1)
+    vir = get_spaces(x, y, 1, 0) + get_spaces(x, y, -1, 0)
+    
+    hor + vir
   end
 
-
-
-  def diagonal_dirs
-    diags = []
+  def diags
     x, y = @pos
-    if
-
+    diag1 = get_spaces(x, y, 1, 1) + get_spaces(x, y, -1, -1)
+    diag2 = get_spaces(x, y, -1, 1) + get_spaces(x, y, 1, -1)
+    diag1 + diag2
   end
 
-  def grow_unblocked_moves_in_dir(x, y)
+  def get_spaces(x, y, dx, dy)
+    x_diff = x + dx
+    y_diff = y + dy
 
+    return [] unless @board.in_bounds?([x_diff, y_diff])
+    return [] if @board[x_diff, y_diff].color == self.color
+    return [x_diff, y_diff] unless @board[x_diff, y_diff].is_a?(NullPiece) || @board[x_diff, y_diff].color == self.color
 
-
+    [[x_diff, y_diff]] + get_spaces(x_diff, y_diff, dx, dy)
   end
-
 
 end

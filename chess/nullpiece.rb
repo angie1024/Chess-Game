@@ -8,11 +8,15 @@ class NullPiece
   end
 
   def color
+
   end
 
   def to_s
+    '   '
   end
 
   def empty?
+    true
   end
+
 end

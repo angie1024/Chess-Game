@@ -20,10 +20,6 @@ class King < Piece
   end
 
   def symbol
-    if @color == :black
-      "\u265a"
-    else
-      "\u2654"
-    end
+    " ♚ "
   end
 end

@@ -20,10 +20,6 @@ class Knight < Piece
   end
 
   def symbol
-    if @color == :black
-      "\u265e"
-    else
-      "\u2658"
-    end
+    " ♞ "
   end
 end
